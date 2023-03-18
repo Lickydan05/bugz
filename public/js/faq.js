@@ -9,11 +9,13 @@ let counter = 10;
 
 const goToTerms = () => {
   //Count down from 10, if above 0 update seconds text, if at 0, send to the terms page
-  counter - 1;
+  /////////counter wasn't subtracting even though it ran = Logic Error ////////
+  counter = counter - 1;
   if (counter <= 0) {
     window.location ="https://" + window.location.host + "/terms";
   } else {
-    $("#seconds").value = counter; // update number of seconds
+    /////was .value but needed to be .innerText = Logic Error /////////
+    $("#seconds").innerText = counter; // update number of seconds
   }
 };
 
@@ -26,7 +28,9 @@ const acceptTerms = () => {
 
 // the event handler for the click event of each h2 element
 const toggle = (evt) => {
-  h2 = evt.currentTarget; // get the clicked h2 element
+
+  //////h2 was missing const in front = reference error////////
+  const h2 = evt.currentTarget; // get the clicked h2 element
   const div = h2.nextElementSibling; // div = h2's sibling div
 
   h2.classList.toggle("minus");
@@ -43,7 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!accepted) {
     // user hasn't accepted terms
     timer = setInterval(goToTerms, 1000);
-    $("accept").addEventListener("click", acceptTerms);
+    /////////////missing hashtag = syntax error///////////////
+    $("#accept").addEventListener("click", acceptTerms);
   } else {
     // hide terms section
     $("#terms").setAttribute("class", "hidden");
@@ -54,8 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // attach event handler for each h2 tag
   for (let h2Element of h2Elements) {
-    h2element.addEventListener("click", toggle);
+    ////////was h2element instead of h2Element = syntax error////////
+    h2Element.addEventListener("click", toggle);
   }
-
-  h2Elements[0].firstChild.Focus();
+  
+///////was 'Focus' instead of 'focus' = syntax error///////
+  h2Elements[0].firstChild.focus();
 });
